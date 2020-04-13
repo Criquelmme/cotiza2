@@ -81,6 +81,7 @@ $autoload['libraries'] = array('database', 'session');
 |
 */
 $autoload['drivers'] = array();
+$autoload['helper'] = array('url');
 
 /*
 | -------------------------------------------------------------------

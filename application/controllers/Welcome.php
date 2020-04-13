@@ -21,12 +21,12 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('inicio2.html');
-		$this->load->model('Model');
-		echo json_encode($this->Model->GetProducts());
+	
 	}
 
-	public function SaveCotizacion(){
-		
+	public function GetCotizacion(){
+		$this->load->model('Model');
+		echo json_encode($this->Model->GetProducts());
 	}
 	
 	

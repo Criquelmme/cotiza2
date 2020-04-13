@@ -41,6 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     });
     function agregar_productos(id, cant){
         products.push("Producto:"+id, "Cantidad:"+cant);
+        alert($("#quantity").val());
     }
     function sendData(){
     var jsonData = JSON.stringify(new Array(products));

@@ -54,7 +54,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           },
           "columns":[
             {"data":"id_product"},
-            {"data":"<img src='https://www.datatables.net/media/images/nav-dt.png' style='height:30px; width:30px'>"},
+            {
+    "data": 'id_image',
+    render: function (data, row, id) {
+        return '<image src="https://mundopack.cl/img/tmp/product_mini_9.jpg?time=1586791490" ';
+    }
+      },
             {"data":"name"},
             {"data":"name_category"}
     ]

@@ -45,7 +45,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     var jsonData = JSON.stringify(products);
     console.log(jsonData);
     return $.ajax({
-    url: "<?php echo site_url('http://mundopack.cl/new/index.php/Welcome/AddCotiza');?>",
+    url: "http://mundopack.cl/new/index.php/Welcome/AddCotiza",
     type: "POST",
     async: false,
     data: {

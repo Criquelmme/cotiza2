@@ -24,9 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </thead> 
         </table>
     <div class="alert alert-warning" role="alert">
-         <strong>información</strong>.
-         Si en la tabla aparecen datos incompletos, se debe ingresar en la funcionalidad ver.
-        </div>
+        <button onclick="sendData();">Agrega Cotización</button>
+    </div>
   </div>
 </div>
 </body>
@@ -35,11 +34,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 <script>
+    var products = [];
     $( document ).ready(function() {
     listar();
     });
+    function agregar_productos(id){
+        products.push(id);
+    }
+    function sendData(){
+    var jsonData = JSON.encode(products);
+    return $.ajax({
+    url: "<?php echo site_url('http://mundopack.cl/new/index.php/Welcome/AddCotiza');?>",
+    type: "POST",
+    async: false,
+    data: {
+    'data': jsonData,
+    },
+    dataType: "text",
+    beforeSend: function() {
+        
+    },
+    success: function(x){
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+    }
+    });
+
+    }
  function listar()
   {  
+      
 
       var table = $('#Tablainventario').dataTable
       ({
@@ -64,7 +88,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       },
             {"data":"name"},
             {"data":"description"},
-            {"data":"name_category"}
+            {"data":"name_category"},
+            {
+            "data": 'id',
+            render: function (data, row, id) {
+                return '<button onclick="agregar_productos('+id['id']+')"></button>';
+            }
+            },
     ]
   });
 }

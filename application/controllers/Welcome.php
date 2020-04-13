@@ -27,7 +27,10 @@ public function GetCotizacion(){
 	$this->load->model('Model');
 	echo json_encode($this->Model->GetProducts());
 }
-
+public function AddCotiza(){
+	$usr= $this->input->post('data');
+	echo $usr;
+}
 	
 
 }

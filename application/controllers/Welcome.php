@@ -23,6 +23,7 @@ class Welcome extends CI_Controller {
 		$this->load->view('inicio2.html');
 		$this->load->model('Model');
 		echo json_encode($this->Model->GetProducts());
+		echo "hola";
 	}
 
 	

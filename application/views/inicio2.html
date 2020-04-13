@@ -4,14 +4,103 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
     <title></title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 </head>
 <body>
-
+    <div class="container">
+    <div class="table-responsive" >
+        <table class="table table-bordered table-hover table-sm" id="Tablainventario">
+          <thead>
+              <tr  class="table-info">
+                  <th>Codigo</th>
+                  <th>Nombre</th>
+                  <th>Descripcion</th>
+                  <th>Tipo</th>
+                  <th>UM</th>
+                  <th>Stock</th>
+                  <th>Bodega</th>
+                  <th>ver</th>
+                  <th>stock</th>
+              </tr>
+          </thead> 
+        </table>
+    <div class="alert alert-warning" role="alert">
+         <strong>información</strong>.
+         Si en la tabla aparecen datos incompletos, se debe ingresar en la funcionalidad ver.
+        </div>
+  </div>
+</div>
 </body>
 </html>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 <script>
-    var obj = <?php $a; ?>;
-    var myJSON = JSON.stringify(obj);
-console.log(myJSON);
+ function listar()
+  {  
+      var table = $('#Tablainventario').dataTable
+      ({
+          autoFill: true,   
+          "language": 
+          {
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+          },
+          "pageLength": 7,
+            "ajax":{
+            "method": "POST",
+            "url":  "<?php echo site_url('Http/JsonInventario');?>",
+            "dataSrc": "",
+          },
+          "columns":[
+            {"data":"Codigo"},
+            {"data":"Nombre"},
+            {"data":"Descripcion"},
+            {"data":"Tipo_paquete"},
+            {"data":"um"},
+            {"data":"Cantidad",
+            "alerta":"Limite_alerta",
+            render: function (data, row, id)
+            {
+                if(data <=  id['Limite_alerta']){
+                  return '<font color="red" data-toggle="tooltip" data-placement="top" title="Stock bajo el limite definido">'+data+'</font>';
+                }
+                else
+                {
+                return data;
+                }
+            }
+              },
+    {"data":"Nbodega"},
+         {
+    "data": 'Codigo',
+    "Nombre": 'Nombre',
+    "data":"ID_Bodega",
+    render: function (data, row, id) {
+        return '<button  onclick="verInventario(\''+ id['Codigo']+'\', \''+ id['Nombre']+'\', \''+ id['Descripcion']+'\',\''+ id['Tipo_paquete']+'\',\''+ id['Cantidad']+'\', \''+ id['Nbodega']+'\', \''+ id['Limite_alerta']+'\',  \''+ id['ID_Bodega']+'\')" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i></button>';
+    }
+      },
+      {
+    "data": 'Codigo',
+    "Nombre": 'Nombre',
+    render: function (data, row, id) {
+        return '<button  onclick="Stock(\''+ id['Codigo']+'\', \''+ id['Nombre']+'\')" class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="top"> <i class="fa fa-boxes"></i></button>';
+    }
+      },
+      
+    ],
+    columnDefs: [
+      { width: "2%", targets: 0 },
+      { width: "15%", targets: 1 },
+      { width: "20%", targets: 2 },
+      { width: "15%", targets: 3 },
+      { width: "10%", targets: 4 },
+      { width: "10%", targets: 5 },
+      { width: "2%", targets: 6 },
+      { width: "2%", targets: 7 },
+      { width: "2%", targets: 8 }
+    ]
+  });
+}
+
 
 </script>

@@ -54,8 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     'data': jsonData,
     },
     dataType: "text",
-    beforeSend: function() {
-        
+    beforeSend: function() {       
     },
     success: function(x){
     },
@@ -66,8 +65,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     }
  function listar()
   {  
-      
-
       var table = $('#Tablainventario').dataTable
       ({
           autoFill: true,   
@@ -95,13 +92,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             {
             "data": 'id',
             render: function (data, row, id) {
-                return '<input type="number" id="quantity" name="quantity" min="1" max="9999" />';
+                return '<input type="number" id="quantity'+id['id']+'" name="quantity'+id['id']+'" min="1" max="9999" />';
             }
             },
             {
             "data": 'id',
             render: function (data, row, id) {
-                return '<button onclick="agregar_productos('+id['id_product']+', '+$("#quantity").val()+')"></button>';
+                return '<button onclick="agregar_productos('+id['id_product']+', '+$("#quantity'+id['id']+'").val()+')"></button>';
             }
             },
     ]

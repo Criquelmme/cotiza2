@@ -6,6 +6,7 @@ class Model extends CI_Model{
 
         $query="SELECT SQL_CALC_FOUND_ROWS p.`id_product`  AS `id_product`,
         pl.`name`  AS `name`,
+        pl.description,
         image_shop.`id_image`  AS `id_image`,
         cl.`name`  AS `name_category`
        FROM  `ps6d_product` p 

@@ -56,47 +56,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             {"data":"id_product"},
             {"data":"name"},
             {"data":"id_image"},
-            {"data":"name_category"},
-         
-            render: function (data, row, id)
-            {
-                if(data <=  id['Limite_alerta']){
-                  return '<font color="red" data-toggle="tooltip" data-placement="top" title="Stock bajo el limite definido">'+data+'</font>';
-                }
-                else
-                {
-                return data;
-                }
-            }
-              },
-    {"data":"Nbodega"},
-         {
-    "data": 'Codigo',
-    "Nombre": 'Nombre',
-    "data":"ID_Bodega",
-    render: function (data, row, id) {
-        return '<button  onclick="verInventario(\''+ id['Codigo']+'\', \''+ id['Nombre']+'\', \''+ id['Descripcion']+'\',\''+ id['Tipo_paquete']+'\',\''+ id['Cantidad']+'\', \''+ id['Nbodega']+'\', \''+ id['Limite_alerta']+'\',  \''+ id['ID_Bodega']+'\')" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i></button>';
-    }
-      },
-      {
-    "data": 'Codigo',
-    "Nombre": 'Nombre',
-    render: function (data, row, id) {
-        return '<button  onclick="Stock(\''+ id['Codigo']+'\', \''+ id['Nombre']+'\')" class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="top"> <i class="fa fa-boxes"></i></button>';
-    }
-      },
-      
+            {"data":"name_category"}
     ],
     columnDefs: [
       { width: "2%", targets: 0 },
       { width: "15%", targets: 1 },
       { width: "20%", targets: 2 },
-      { width: "15%", targets: 3 },
-      { width: "10%", targets: 4 },
-      { width: "10%", targets: 5 },
-      { width: "2%", targets: 6 },
-      { width: "2%", targets: 7 },
-      { width: "2%", targets: 8 }
+      { width: "15%", targets: 3 }
     ]
   });
 }

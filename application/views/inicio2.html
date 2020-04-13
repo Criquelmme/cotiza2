@@ -4,9 +4,102 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
     <title></title>
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
- 
+    <div class="container">
+    <div class="table-responsive" >
+        <table class="table table-bordered table-hover table-sm" id="Tablainventario">
+          <thead>
+              <tr  class="table-info">
+                  <th>id</th>
+                  <th>imagen</th>
+                  <th>nombre</th>
+                  <th>Categoria</th>
+              </tr>
+          </thead> 
+        </table>
+    <div class="alert alert-warning" role="alert">
+         <strong>información</strong>.
+         Si en la tabla aparecen datos incompletos, se debe ingresar en la funcionalidad ver.
+        </div>
+  </div>
+</div>
 </body>
 </html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $( document ).ready(function() {
+    listar();
+    });
+ function listar()
+  {  
+
+      var table = $('#Tablainventario').dataTable
+      ({
+          autoFill: true,   
+          "language": 
+          {
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+          },
+          "pageLength": 7,
+            "ajax":{
+            "method": "POST",
+             "url":  "<?php echo site_url('Welcome/GetCotizacion');?>",
+            "dataSrc": "",
+          },
+          "columns":[
+            {"data":"id_product"},
+            {"data":"name"},
+            {"data":"id_image"},
+            {"data":"name_category"},
+         
+            render: function (data, row, id)
+            {
+                if(data <=  id['Limite_alerta']){
+                  return '<font color="red" data-toggle="tooltip" data-placement="top" title="Stock bajo el limite definido">'+data+'</font>';
+                }
+                else
+                {
+                return data;
+                }
+            }
+              },
+    {"data":"Nbodega"},
+         {
+    "data": 'Codigo',
+    "Nombre": 'Nombre',
+    "data":"ID_Bodega",
+    render: function (data, row, id) {
+        return '<button  onclick="verInventario(\''+ id['Codigo']+'\', \''+ id['Nombre']+'\', \''+ id['Descripcion']+'\',\''+ id['Tipo_paquete']+'\',\''+ id['Cantidad']+'\', \''+ id['Nbodega']+'\', \''+ id['Limite_alerta']+'\',  \''+ id['ID_Bodega']+'\')" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i></button>';
+    }
+      },
+      {
+    "data": 'Codigo',
+    "Nombre": 'Nombre',
+    render: function (data, row, id) {
+        return '<button  onclick="Stock(\''+ id['Codigo']+'\', \''+ id['Nombre']+'\')" class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="top"> <i class="fa fa-boxes"></i></button>';
+    }
+      },
+      
+    ],
+    columnDefs: [
+      { width: "2%", targets: 0 },
+      { width: "15%", targets: 1 },
+      { width: "20%", targets: 2 },
+      { width: "15%", targets: 3 },
+      { width: "10%", targets: 4 },
+      { width: "10%", targets: 5 },
+      { width: "2%", targets: 6 },
+      { width: "2%", targets: 7 },
+      { width: "2%", targets: 8 }
+    ]
+  });
+}
+
+
+</script>

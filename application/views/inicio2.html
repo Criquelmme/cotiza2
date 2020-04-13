@@ -39,10 +39,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     listar();
     });
     function agregar_productos(id){
-        products.push(id);
+        products.push("producto", id);
     }
     function sendData(){
-    var jsonData = JSON.stringify(products);
+    var jsonData = JSON.stringify(array(products));
     console.log(jsonData);
     return $.ajax({
     url: "http://mundopack.cl/new/index.php/Welcome/AddCotiza",

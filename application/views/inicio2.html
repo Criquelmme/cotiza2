@@ -99,7 +99,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             "data": 'id',
             render: function (data, row, id) {
                 var data = table.$('input, number').serialize();
-                alert(data);
+              console.log(data);
                 return '<button onclick="agregar_productos('+id['id_product']+', '+$("#quantity").val()+')"></button>';
             }
             },

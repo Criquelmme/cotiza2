@@ -40,8 +40,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     listar();
     });
     function agregar_productos(id, cant){
+        var cant = $(this).parent("tr").find('#quantity').val();
         products.push("Producto:"+id, "Cantidad:"+cant);
-        alert($("#quantity").val());
     }
     function sendData(){
     var jsonData = JSON.stringify(new Array(products));
@@ -98,8 +98,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             {
             "data": 'id',
             render: function (data, row, id) {
-                var cant = $(this).parent("tr").find('#quantity').val();
-
                 return '<button onclick="agregar_productos('+id['id_product']+', '+cant+')"></button>';
             }
             },

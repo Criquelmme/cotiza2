@@ -41,7 +41,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     });
     function agregar_productos(id, cant){
         products.push("Producto:"+id, "Cantidad:"+cant);
-        alert($("#quantity").val());
     }
     function sendData(){
     var jsonData = JSON.stringify(new Array(products));
@@ -92,13 +91,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             {
             "data": 'id',
             render: function (data, row, id) {
-                return '<input type="number" id="quantity" name="quantity" min="1" max="9999" />';
+                return '<input type="number" id="quantity" name="quantity" class="txtcantidad" min="1" max="9999" />';
             }
             },
             {
             "data": 'id',
             render: function (data, row, id) {
-                var nameInput = $(this).closest('tr').find('#quantity').val();
+                var nameInput = $(this).closest('tr').find('.txtcantidad').val();
                 console.log(nameInput);
                 return '<button onclick="agregar_productos('+id['id_product']+', '+nameInput+')"></button>';
             }

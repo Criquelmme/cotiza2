@@ -98,7 +98,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             {
             "data": 'id',
             render: function (data, row, id) {
-                var cant = $(this).parent("tr").find('.quantity').val();
+                var cant = $(this).parents('tr').find('.quantity').val();
                 return '<button onclick="agregar_productos('+id['id_product']+', '+cant+')"></button>';
             }
             },
